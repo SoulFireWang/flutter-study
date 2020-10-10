@@ -1,0 +1,571 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>navigator · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../tip.html" />
+    
+    
+    <link rel="prev" href="overlay.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../test.html">
+            
+                <a href="../test.html">
+            
+                    
+                    语法测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">组件</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="overlay.html">
+            
+                <a href="overlay.html">
+            
+                    
+                    overlay
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2" data-path="navigator.html">
+            
+                <a href="navigator.html">
+            
+                    
+                    navigator
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">其它</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../tip.html">
+            
+                <a href="../tip.html">
+            
+                    
+                    小技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >navigator</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="navigator">navigator</h1>
+<h3 id="&#x7B80;&#x4ECB;">&#x7B80;&#x4ECB;</h3>
+<p>A widget that manages a set of child widgets with a stack discipline.</p>
+<p>Many apps have a navigator near the top of their widget hierarchy in order
+to display their logical history using an [Overlay] with the most recently
+visited pages visually on top of the older pages. Using this pattern lets
+the navigator visually transition from one page to another by moving the widgets
+around in the overlay. Similarly, the navigator can be used to show a dialog
+by positioning the dialog widget above the current page.</p>
+<pre><code>1. &#x4F7F;&#x7528;[Overlay]&#x53BB;&#x663E;&#x793A;&#x9875;&#x9762;&#x7684;&#x5C42;&#x7EA7;&#xFF0C;
+2. &#x901A;&#x8FC7;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x80FD;&#x5C55;&#x793A;&#x9875;&#x9762;&#x5207;&#x6362;&#x7684;&#x903B;&#x8F91;&#x548C;&#x8FC7;&#x7A0B;&#x3002;
+3. &#x540C;&#x65F6;&#xFF0C;&#x4E5F;&#x80FD;&#x5728;&#x5F53;&#x524D;&#x9875;&#x9762;&#x4E2D;&#x5C55;&#x793A;&#x5BF9;&#x8BDD;&#x6846;
+</code></pre><h4 id="using-the-navigator-api&#xFF08;&#x4F7F;&#x7528;navigator&#x63A5;&#x53E3;&#xFF09;">Using the Navigator API&#xFF08;&#x4F7F;&#x7528;Navigator&#x63A5;&#x53E3;&#xFF09;</h4>
+<p>Mobile apps typically reveal their contents via full-screen elements
+called &quot;screens&quot; or &quot;pages&quot;. In Flutter these elements are called
+routes and they&apos;re managed by a [Navigator] widget. The navigator
+manages a stack of [Route] objects and provides two ways for managing
+the stack, the declarative API [Navigator.pages] or imperative API
+[Navigator.push] and [Navigator.pop].</p>
+<pre><code>1. routes &#x7528;&#x4E8E;&#x5C55;&#x793A;&#x5E94;&#x7528;&#x5185;&#x5BB9;&#xFF0C;&#x7B49;&#x4EF7;&#x4E8E;&#x201C;screens&#x201D; &#x6216;&#x8005; &#x201C;pages&#x201D;&#xFF08;&#x5168;&#x5C4F;&#x7EC4;&#x4EF6;&#xFF09;
+2. navigator&#x7BA1;&#x7406;routes
+3. &#x4E24;&#x79CD;&#x7BA1;&#x7406;&#x65B9;&#x5F0F;
+   &#x58F0;&#x660E;&#x5F0F;API Navigator.pages
+   &#x5373;&#x65F6;API Navigator.push &#x548C; Navigator.pop
+</code></pre><h4 id="using-the-pages-api&#xFF08;&#x4F7F;&#x7528;pages&#x63A5;&#x53E3;&#xFF09;">Using the Pages API&#xFF08;&#x4F7F;&#x7528;Pages&#x63A5;&#x53E3;&#xFF09;</h4>
+<p>The [Navigator] will convert its [Navigator.pages] into a stack of [Route]s
+if it is provided. A change in [Navigator.pages] will trigger an update to
+the stack of [Route]s. The [Navigator] will update its routes to match the
+new configuration of its [Navigator.pages]. To use this API, one can create
+a [Page] subclass and defines a list of [Page]s for [Navigator.pages]. A
+[Navigator.onPopPage] callback is also required to properly clean up the
+input pages in case of a pop.</p>
+<pre><code>1. &#x5C06;Navigator.pages&#x8F6C;&#x53D8;&#x4E3A;Route&#x6808;
+2. Navigator.pages&#x7684;&#x4FEE;&#x6539;&#x4F1A;&#x89E6;&#x53D1;Route&#x7684;&#x66F4;&#x65B0;
+3. &#x5982;&#x4F55;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;API
+   a. &#x7EE7;&#x627F;Page&#x7C7B;
+   b. &#x4E3A;Navigator.pages&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;Page&#x7C7B;&#x578B;&#x7684;&#x5217;&#x8868;
+   c. &#x5B9E;&#x73B0;Navigator.onPopPage&#xFF0C;&#x5728;&#x9875;&#x9762;&#x9000;&#x51FA;&#x7684;&#x65F6;&#x5019;&#x6B63;&#x786E;&#x5220;&#x9664;Page
+</code></pre><p>By Default, the [Navigator] will use [DefaultTransitionDelegate] to decide
+how routes transition in or out of the screen. To customize it, define a
+[TransitionDelegate] subclass and provide it to the
+[Navigator.transitionDelegate].</p>
+<pre><code>1. &#x901A;&#x8FC7;DefaultTransitionDelegate&#x53BB;&#x51B3;&#x5B9A;&#x9875;&#x9762;&#x5207;&#x6362;&#x52A8;&#x753B;
+2. &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;Navigator.transitionDelegate&#x6765;&#x81EA;&#x5B9A;&#x4E49;&#x9875;&#x9762;&#x5207;&#x6362;&#x52A8;&#x753B;
+</code></pre><h4 id="displaying-a-full-screen-route&#xFF08;&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x5168;&#x5C4F;&#x9875;&#x9762;&#xFF09;">Displaying a full-screen route&#xFF08;&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x5168;&#x5C4F;&#x9875;&#x9762;&#xFF09;</h4>
+<p>Although you can create a navigator directly, it&apos;s most common to use the
+navigator created by the <code>Router</code> which itself is created and configured by
+a [WidgetsApp] or a [MaterialApp] widget. You can refer to that navigator
+with [Navigator.of].</p>
+<pre><code>1. &#x4E0D;&#x63A8;&#x8350;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;navigator&#xFF0C;
+   &#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x4E0B;&#x7528;Router&#xFF08;&#x88AB;WidgetsApp&#x6216;MaterialApp&#x6240;&#x521B;&#x5EFA;&#xFF09;&#x521B;&#x5EFA;&#x7684;navigator&#x3002;
+2. &#x80FD;&#x901A;&#x8FC7;Navigator.of&#x8BBF;&#x95EE;
+</code></pre><p>A [MaterialApp] is the simplest way to set things up. The [MaterialApp]&apos;s
+home becomes the route at the bottom of the [Navigator]&apos;s stack. It is what
+you see when the app is launched.</p>
+<pre><code>MaterialApp &#x662F;&#x6700;&#x7B80;&#x5355;&#x7684;navigator&#x5B9E;&#x4F8B;&#x5316;&#x65B9;&#x6CD5;&#xFF0C;MaterialApp&#x7684;home&#x5C31;&#x662F;Navigator&#x7684;&#x6808;&#x5E95;
+</code></pre><h4 id="using-named-navigator-routes&#xFF08;&#x4F7F;&#x7528;&#x540D;&#x79F0;&#x8FDB;&#x884C;&#x8DEF;&#x7531;&#xFF09;">Using named navigator routes&#xFF08;&#x4F7F;&#x7528;&#x540D;&#x79F0;&#x8FDB;&#x884C;&#x8DEF;&#x7531;&#xFF09;</h4>
+<p>Mobile apps often manage a large number of routes and it&apos;s often
+easiest to refer to them by name. Route names, by convention,
+use a path-like structure (for example, &apos;/a/b/c&apos;).
+The app&apos;s home page route is named &apos;/&apos; by default.</p>
+<pre><code>1. &#x4F7F;&#x7528;&#x540D;&#x79F0;&#x53BB;&#x8DEF;&#x7531;&#x6700;&#x65B9;&#x4FBF;
+2. &#x7528; path-like &#x7ED3;&#x6784;&#x4F5C;&#x4E3A;&#x8DEF;&#x7531;&#x540D;&#x79F0;&#xFF08;&#x4F8B;&#x5982;&#xFF1A;&apos;/a/b/c&apos; &#xFF09;
+3. &#x56DE;&#x5230;APP&#x4E3B;&#x9875;&#x53EF;&#x7528;&#x9ED8;&#x8BA4;&#x7528;&apos;/&apos;
+</code></pre><h5 id="&#x4F8B;&#x5982;">&#x4F8B;&#x5982;</h5>
+<pre><code class="lang-dart"><span class="hljs-keyword">void</span> main() {
+   runApp(MaterialApp(
+     home: MyAppHome(), <span class="hljs-comment">// becomes the route named &apos;/&apos;</span>
+     routes: &lt;<span class="hljs-built_in">String</span>, WidgetBuilder&gt; {
+       <span class="hljs-string">&apos;/a&apos;</span>: (BuildContext context) =&gt; MyPage(title: <span class="hljs-string">&apos;page A&apos;</span>),
+       <span class="hljs-string">&apos;/b&apos;</span>: (BuildContext context) =&gt; MyPage(title: <span class="hljs-string">&apos;page B&apos;</span>),
+       <span class="hljs-string">&apos;/c&apos;</span>: (BuildContext context) =&gt; MyPage(title: <span class="hljs-string">&apos;page C&apos;</span>),
+     },
+   ));
+ }
+</code></pre>
+<h5 id="&#x4F7F;&#x7528;&#x540D;&#x79F0;&#x8FDB;&#x884C;&#x8DEF;&#x7531;">&#x4F7F;&#x7528;&#x540D;&#x79F0;&#x8FDB;&#x884C;&#x8DEF;&#x7531;</h5>
+<pre><code class="lang-dart"> Navigator.pushNamed(context, <span class="hljs-string">&apos;/b&apos;</span>);
+</code></pre>
+<h4 id="routes-can-return-a-value&#xFF08;&#x8DEF;&#x7531;&#x8FD4;&#x56DE;&#x503C;&#xFF09;">Routes can return a value&#xFF08;&#x8DEF;&#x7531;&#x8FD4;&#x56DE;&#x503C;&#xFF09;</h4>
+<p>When a route is pushed to ask the user for a value, the value can be
+returned via the [pop] method&apos;s result parameter.</p>
+<p>Methods that push a route return a [Future]. The Future resolves when the
+route is popped and the [Future]&apos;s value is the [pop] method&apos;s <code>result</code>
+parameter.</p>
+<pre><code>Navigator.push&#x4F1A;&#x8FD4;&#x56DE;Future&#xFF0C;&#x4F1A;&#x5728;pop&#x65F6;&#x8C03;&#x7528;Future&#x7684;resolve&#xFF0C;pop&#x7684;result
+&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x53C2;&#x6570;
+</code></pre><h5 id="&#x4F8B;&#x5982;">&#x4F8B;&#x5982;</h5>
+<pre><code class="lang-dart"> <span class="hljs-built_in">bool</span> value = <span class="hljs-keyword">await</span> Navigator.push(context, MaterialPageRoute&lt;<span class="hljs-built_in">bool</span>&gt;(
+   builder: (BuildContext context) {
+     <span class="hljs-keyword">return</span> Center(
+       child: GestureDetector(
+         child: Text(<span class="hljs-string">&apos;OK&apos;</span>),
+         onTap: () { Navigator.pop(context, <span class="hljs-keyword">true</span>); }
+       ),
+     );
+   }
+ ));
+</code></pre>
+<h4 id="popup-routes&#xFF08;&#x5F39;&#x51FA;&#x8DEF;&#x7531;&#xFF09;">Popup routes&#xFF08;&#x5F39;&#x51FA;&#x8DEF;&#x7531;&#xFF09;</h4>
+<p> Routes don&apos;t have to obscure the entire screen. [PopupRoute]s cover the
+ screen with a [ModalRoute.barrierColor] that can be only partially opaque to
+ allow the current screen to show through. Popup routes are &quot;modal&quot; because
+ they block input to the widgets below.</p>
+<pre><code> 1. PopupRoute &#x4E0D;&#x6BD4;&#x906E;&#x76D6;&#x6574;&#x4E2A;&#x5C4F;&#x5E55;&#xFF0C; 
+ 2. &#x53EF;&#x4EE5;&#x901A;&#x8FC7;ModalRoute.barrierColor&#x906E;&#x7F69;&#x5F39;&#x6846;&#x5728;&#x5C4F;&#x5E55;&#x4E2D;&#x7684;&#x5176;&#x4F59;&#x90E8;&#x5206;&#xFF0C;&#x963B;&#x6B62;&#x9875;&#x9762;&#x4E2D;&#x5176;&#x4F59;&#x90E8;&#x5206;&#x7684;&#x4EA4;&#x4E92;&#x54CD;&#x5E94;
+</code></pre><p> There are functions which create and show popup routes. For
+ example: [showDialog], [showMenu], and [showModalBottomSheet]. These
+ functions return their pushed route&apos;s Future as described above.
+ Callers can await the returned value to take an action when the
+ route is popped, or to discover the route&apos;s value.</p>
+<p>There are also widgets which create popup routes, like [PopupMenuButton] and
+ [DropdownButton]. These widgets create internal subclasses of PopupRoute
+ and use the Navigator&apos;s push and pop methods to show and dismiss them.</p>
+<pre><code> 1. &#x5F39;&#x51FA;&#x578B;&#x8DEF;&#x7531;&#x65B9;&#x6CD5;&#xFF1A;
+    a. showDialog
+    b. showMenu
+    c. showModalBottomSheet
+ 2. &#x540C;&#x65F6;&#x4E5F;&#x6709;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;&#x5F39;&#x51FA;&#x8DEF;&#x7531;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x50CF; PopupMenuButton &#x548C; DropdownButton&#x3002;
+    &#x8FD9;&#x4E9B;&#x7EC4;&#x4EF6;&#x5728;&#x5185;&#x90E8;&#x521B;&#x5EFA;PopupRoute&#x7684;&#x5B50;&#x7C7B;&#xFF0C;&#x5E76;&#x7528;Navigator&apos;s push and pop&#x53BB;&#x663E;&#x793A;&#x6216;&#x8005;&#x9690;&#x85CF;&#x4ED6;&#x4EEC;
+</code></pre><h4 id="custom-routes&#xFF08;&#x81EA;&#x5B9A;&#x4E49;&#x8DEF;&#x7531;&#xFF09;">Custom routes&#xFF08;&#x81EA;&#x5B9A;&#x4E49;&#x8DEF;&#x7531;&#xFF09;</h4>
+<p> You can create your own subclass of one of the widget library route classes
+ like [PopupRoute], [ModalRoute], or [PageRoute], to control the animated
+ transition employed to show the route, the color and behavior of the route&apos;s
+ modal barrier, and other aspects of the route.</p>
+<pre><code>1. &#x4F60;&#x80FD;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;&#x5B50;&#x7C7B;&#x6765;&#x63A7;&#x5236;&#x8DEF;&#x7531;&#x52A8;&#x753B;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x8DEF;&#x7531;&#x8499;&#x7248;&#x7684;&#x989C;&#x8272;&#x548C;&#x884C;&#x4E3A;&#xFF0C;&#x8FD8;&#x6709;&#x8DEF;&#x7531;&#x7684;&#x5176;&#x5B83;&#x65B9;&#x9762;
+</code></pre><p> The [PageRouteBuilder] class makes it possible to define a custom route
+ in terms of callbacks. Here&apos;s an example that rotates and fades its child
+ when the route appears or disappears. This route does not obscure the entire
+ screen because it specifies <code>opaque: false</code>, just as a popup route does.</p>
+<pre><code>PageRouteBuilder&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x56DE;&#x8C03;&#x7684;&#x65B9;&#x5F0F;&#x81EA;&#x5B9A;&#x4E49;&#x8DEF;&#x7531;
+</code></pre><pre><code class="lang-dart">Navigator.push(context, PageRouteBuilder(
+  opaque: <span class="hljs-keyword">false</span>,
+  pageBuilder: (BuildContext context, _, __) {
+
+    <span class="hljs-comment"><span class="markdown">/// &#x5C45;&#x4E2D;&#x663E;&#x793A;</span></span>
+    <span class="hljs-keyword">return</span> Center(child: Text(<span class="hljs-string">&apos;My PageRoute&apos;</span>));
+  },
+  <span class="hljs-comment">// &#x5B9A;&#x4E49;&#x4E86;&#x8DEF;&#x7531;&#x53D8;&#x6362;</span>
+  transitionsBuilder: (___, Animation&lt;<span class="hljs-built_in">double</span>&gt; animation, ____, Widget child) {
+    <span class="hljs-keyword">return</span> FadeTransition(
+      opacity: animation,
+      child: RotationTransition(
+        turns: Tween&lt;<span class="hljs-built_in">double</span>&gt;(begin: <span class="hljs-number">0.5</span>, end: <span class="hljs-number">1.0</span>).animate(animation),
+        child: child,
+      ),
+    );
+  }
+));
+</code></pre>
+<h4 id="nesting-navigators-&#x5D4C;&#x5957;&#x8DEF;&#x7531;">Nesting Navigators (&#x5D4C;&#x5957;&#x8DEF;&#x7531;)</h4>
+<p>An app can use more than one [Navigator]. Nesting one [Navigator] below
+another [Navigator] can be used to create an &quot;inner journey&quot; such as tabbed
+navigation, user registration, store checkout, or other independent journeys
+that represent a subsection of your overall application.</p>
+<pre><code>&#x8DEF;&#x7531;&#x5D4C;&#x5957;&#x7684;&#x7528;&#x6CD5;&#xFF1A;tabbed navigation&#x3001;&#x7528;&#x6237;&#x6CE8;&#x518C;&#x3001;&#x7ED3;&#x8D26;
+</code></pre><p>&#x4F8B;&#x5982;&#x5BF9;&#x4E8E;iOS&#x6765;&#x8BF4;&#xFF0C;tab&#x6761;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5206;&#x9879;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x7684;navigator&#xFF0C;&#x79F0;&#x4E4B;&#x4E3A;&#x5E76;&#x884C;&#x5BFC;&#x822A;&#x7BA1;&#x7406;&#x3002;
+&#x53E6;&#x5916;&#x5BF9;&#x4E8E;&#x5E76;&#x884C;&#x5BFC;&#x822A;&#x7BA1;&#x7406;&#xFF0C;&#x4ECD;&#x7136;&#x9700;&#x8981;&#x5B8C;&#x5168;&#x8986;&#x76D6;tab&#x9875;&#x7684;&#x5168;&#x5C4F;&#x8DEF;&#x7531;&#x3002;&#x4F8B;&#x5982;&#x4E00;&#x4E2A;&#x767B;&#x9646;&#x6D41;&#x7A0B;&#xFF0C;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x5F39;&#x6846;&#x3002;&#x56E0;&#x6B64;&#x5FC5;&#x987B;
+&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x6839;&#x8DEF;&#x7531;&#xFF0C;tab&#x8DEF;&#x7531;&#x4F5C;&#x4E3A;&#x8BE5;&#x6839;&#x8DEF;&#x7531;&#x7684;&#x5B50;&#x8DEF;&#x7531;&#x3002;</p>
+<h5 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h5>
+<pre><code class="lang-dart"> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>{
+   <span class="hljs-meta">@override</span>
+   Widget build(BuildContext context) {
+     <span class="hljs-keyword">return</span> MaterialApp(
+       title: <span class="hljs-string">&apos;Flutter Code Sample for Navigator&apos;</span>,
+       <span class="hljs-comment">// MaterialApp contains our top-level Navigator</span>
+       initialRoute: <span class="hljs-string">&apos;/&apos;</span>,
+       routes: {
+         <span class="hljs-string">&apos;/&apos;</span>: (BuildContext context) =&gt; HomePage(),
+         <span class="hljs-string">&apos;/signup&apos;</span>: (BuildContext context) =&gt; SignUpPage(),
+       },
+     );
+   }
+ }
+
+ <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HomePage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>{
+   <span class="hljs-meta">@override</span>
+   Widget build(BuildContext context) {
+     <span class="hljs-keyword">return</span> DefaultTextStyle(
+       style: Theme.of(context).textTheme.headline4,
+       child: Container(
+         color: Colors.white,
+         alignment: Alignment.center,
+         child: Text(<span class="hljs-string">&apos;Home Page&apos;</span>),
+       ),
+     );
+   }
+ }
+
+ <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CollectPersonalInfoPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>{
+   <span class="hljs-meta">@override</span>
+   Widget build(BuildContext context) {
+     <span class="hljs-keyword">return</span> DefaultTextStyle(
+       style: Theme.of(context).textTheme.headline4,
+       child: GestureDetector(
+         onTap: () {
+           <span class="hljs-comment">// This moves from the personal info page to the credentials page,</span>
+           <span class="hljs-comment">// replacing this page with that one.</span>
+           Navigator.of(context)
+             .pushReplacementNamed(<span class="hljs-string">&apos;signup/choose_credentials&apos;</span>);
+         },
+         child: Container(
+           color: Colors.lightBlue,
+           alignment: Alignment.center,
+           child: Text(<span class="hljs-string">&apos;Collect Personal Info Page&apos;</span>),
+         ),
+       ),
+     );
+   }
+ }
+
+ <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChooseCredentialsPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>{
+   <span class="hljs-keyword">const</span> ChooseCredentialsPage({
+     <span class="hljs-keyword">this</span>.onSignupComplete,
+   });
+
+   <span class="hljs-keyword">final</span> VoidCallback onSignupComplete;
+
+   <span class="hljs-meta">@override</span>
+   Widget build(BuildContext context) {
+     <span class="hljs-keyword">return</span> GestureDetector(
+       onTap: onSignupComplete,
+       child: DefaultTextStyle(
+         style: Theme.of(context).textTheme.headline4,
+         child: Container(
+           color: Colors.pinkAccent,
+           alignment: Alignment.center,
+           child: Text(<span class="hljs-string">&apos;Choose Credentials Page&apos;</span>),
+         ),
+       ),
+     );
+   }
+ }
+
+ <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SignUpPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>{
+   <span class="hljs-meta">@override</span>
+   Widget build(BuildContext context) {
+     <span class="hljs-comment">// SignUpPage builds its own Navigator which ends up being a nested</span>
+     <span class="hljs-comment">// Navigator in our app.</span>
+     <span class="hljs-keyword">return</span> Navigator(
+       initialRoute: <span class="hljs-string">&apos;signup/personal_info&apos;</span>,
+       onGenerateRoute: (RouteSettings settings) {
+         WidgetBuilder builder;
+         <span class="hljs-keyword">switch</span> (settings.name) {
+           <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;signup/personal_info&apos;</span>:
+           <span class="hljs-comment">// Assume CollectPersonalInfoPage collects personal info and then</span>
+           <span class="hljs-comment">// navigates to &apos;signup/choose_credentials&apos;.</span>
+             builder = (BuildContext _) =&gt; CollectPersonalInfoPage();
+             <span class="hljs-keyword">break</span>;
+           <span class="hljs-keyword">case</span> <span class="hljs-string">&apos;signup/choose_credentials&apos;</span>:
+           <span class="hljs-comment">// Assume ChooseCredentialsPage collects new credentials and then</span>
+           <span class="hljs-comment">// invokes &apos;onSignupComplete()&apos;.</span>
+             builder = (BuildContext _) =&gt; ChooseCredentialsPage(
+               onSignupComplete: () {
+                 <span class="hljs-comment">// Referencing Navigator.of(context) from here refers to the</span>
+                 <span class="hljs-comment">// top level Navigator because SignUpPage is above the</span>
+                 <span class="hljs-comment">// nested Navigator that it created. Therefore, this pop()</span>
+                 <span class="hljs-comment">// will pop the entire &quot;sign up&quot; journey and return to the</span>
+                 <span class="hljs-comment">// &quot;/&quot; route, AKA HomePage.</span>
+                 Navigator.of(context).pop();
+               },
+             );
+             <span class="hljs-keyword">break</span>;
+           <span class="hljs-keyword">default</span>:
+             <span class="hljs-keyword">throw</span> Exception(<span class="hljs-string">&apos;Invalid route: <span class="hljs-subst">${settings.name}</span>&apos;</span>);
+         }
+         <span class="hljs-keyword">return</span> MaterialPageRoute(builder: builder, settings: settings);
+       },
+     );
+   }
+ }
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="overlay.html" class="navigation navigation-prev " aria-label="Previous page: overlay">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../tip.html" class="navigation navigation-next " aria-label="Next page: 小技巧">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"navigator","level":"2.2","depth":1,"next":{"title":"小技巧","level":"3.1","depth":1,"path":"tip.md","ref":"tip.md","articles":[]},"previous":{"title":"overlay","level":"2.1","depth":1,"path":"widget/overlay.md","ref":"widget/overlay.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"widget/navigator.md","mtime":"2020-10-10T07:23:58.408Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-09T14:12:44.264Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,363 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>overlay · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="navigator.html" />
+    
+    
+    <link rel="prev" href="../test.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../test.html">
+            
+                <a href="../test.html">
+            
+                    
+                    语法测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">组件</li>
+        
+        
+    
+        <li class="chapter active" data-level="2.1" data-path="overlay.html">
+            
+                <a href="overlay.html">
+            
+                    
+                    overlay
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="navigator.html">
+            
+                <a href="navigator.html">
+            
+                    
+                    navigator
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">其它</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../tip.html">
+            
+                <a href="../tip.html">
+            
+                    
+                    小技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >overlay</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="overlay">overlay</h1>
+<h3 id="&#x7B80;&#x4ECB;">&#x7B80;&#x4ECB;</h3>
+<p>A [Stack] of entries that can be managed independently.
+Overlays let independent child widgets &quot;float&quot; visual elements on top of
+other widgets by inserting them into the overlay&apos;s [Stack]. The overlay lets
+each of these widgets manage their participation in the overlay using [OverlayEntry] objects.</p>
+<pre><code>1. &#x72EC;&#x7ACB;&#x7684;&#x6808;&#x5F0F;&#x5E03;&#x5C40;
+2. &#x901A;&#x8FC7;&#x63D2;&#x5165;overlay&#x5E03;&#x5C40;&#x6808;&#xFF0C;&#x4F7F;&#x72EC;&#x7ACB;&#x7684;&#x5B50;&#x7EC4;&#x4EF6;&#x7684;&#x53EF;&#x89C6;&#x5316;&#x5143;&#x7D20;__&#x60AC;&#x6D6E;&#x5728;&#x5176;&#x5B83;&#x7EC4;&#x4EF6;&#x4E0A;&#x9762;__
+3. &#x8FD9;&#x4E9B;&#x5143;&#x7D20;&#x901A;&#x8FC7;&#x3010;OverlayEntry&#x3011;&#x8FDB;&#x884C;&#x5404;&#x81EA;&#x7BA1;&#x7406;
+</code></pre><p>Although you can create an [Overlay] directly, it&apos;s most common to use the
+overlay created by the [Navigator] in a [WidgetsApp] or a [MaterialApp]. The
+navigator uses its overlay to manage the visual appearance of its routes.</p>
+<pre><code>1. &#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x901A;&#x8FC7;Navigator&#x521B;&#x5EFA;Overlay
+2. navigator&#x7528;overlay&#x53BB;&#x7BA1;&#x7406;&#x8DEF;&#x7531;&#x7684;&#x53EF;&#x89C6;&#x5316;&#x90E8;&#x5206;
+</code></pre><h3 id="&#x4EE3;&#x7801;&#x89E3;&#x6790;">&#x4EE3;&#x7801;&#x89E3;&#x6790;</h3>
+<pre><code class="lang-dart"><span class="hljs-meta">@override</span>
+  Widget build(BuildContext context) {
+    <span class="hljs-comment">// This list is filled backwards and then reversed below before</span>
+    <span class="hljs-comment">// it is added to the tree.</span>
+    <span class="hljs-keyword">final</span> <span class="hljs-built_in">List</span>&lt;Widget&gt; children = &lt;Widget&gt;[];
+    <span class="hljs-built_in">bool</span> onstage = <span class="hljs-keyword">true</span>;
+    <span class="hljs-built_in">int</span> onstageCount = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = _entries.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i -= <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">final</span> OverlayEntry entry = _entries[i];
+      <span class="hljs-keyword">if</span> (onstage) {
+        onstageCount += <span class="hljs-number">1</span>;
+        children.add(_OverlayEntryWidget(
+          key: entry._key,
+          entry: entry,
+        ));
+        <span class="hljs-keyword">if</span> (entry.opaque)
+          onstage = <span class="hljs-keyword">false</span>;
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (entry.maintainState) {
+        children.add(_OverlayEntryWidget(
+          key: entry._key,
+          entry: entry,
+          tickerEnabled: <span class="hljs-keyword">false</span>,
+        ));
+      }
+    }
+    <span class="hljs-comment"><span class="markdown">/// &#x5173;&#x4E8E;_Theatre&#x7684;&#x8BF4;&#x660E;</span></span>
+    <span class="hljs-comment"><span class="markdown">/// Special version of </span>a<span class="markdown"> [Stack], that </span>doesn&apos;t<span class="markdown"> layout and render </span>the<span class="markdown"> first</span></span>
+    <span class="hljs-comment"><span class="markdown">/// [skipCount] children.</span></span>
+    <span class="hljs-comment"><span class="markdown">///</span></span>
+    <span class="hljs-comment"><span class="markdown">/// The first [skipCount] children </span>are<span class="markdown"> considered &quot;offstage&quot;.</span></span>
+    <span class="hljs-keyword">return</span> _Theatre(
+      skipCount: children.length - onstageCount,
+      children: children.reversed.toList(growable: <span class="hljs-keyword">false</span>),
+      clipBehavior: widget.clipBehavior,
+    );
+  }
+</code></pre>
+<blockquote>
+<p>overlay&#x4ECE;&#x903B;&#x8F91;&#x4E0A;&#x53EF;&#x4EE5;&#x770B;&#x505A;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;stack</p>
+</blockquote>
+<h3 id="overlayentry">OverlayEntry</h3>
+<ul>
+<li>&#x901A;&#x8FC7;OverlayState.insert&#x6216;&#x8005;OverlayState.insertAll&#x63D2;&#x5165;&#x5230;Overlay&#x4E2D;</li>
+<li>&#x901A;&#x8FC7;Overlay.of&#x627E;&#x5230;&#x76F8;&#x5173;&#x8054;&#x7684;&#x901A;&#x8FC7;OverlayState</li>
+<li>Positioned &#x548C; AnimatedPositioned &#x662F;&#x53EF;&#x7528;&#x7684;&#xFF0C;&#x7531;&#x6B64;&#x53EF;&#x5B9E;&#x73B0;&#x62D6;&#x52A8;&#x6548;&#x679C;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x7EC4;&#x4EF6;&#x8986;&#x76D6;&#x4E86;&#x4E86;overlay,&#x90A3;&#x4E48;overlay&#x5C06;&#x4E0D;&#x4F1A;&#x5728;widget&#x6811;&#x4E2D;&#x7EE7;&#x7EED;&#x5B58;&#x5728;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5728;overlay&#x4E2D;&#x7684;stateful widgets&#xFF0C;
+&#x5047;&#x5982;&#x60F3;&#x8981;&#x7EE7;&#x7EED;&#x4FDD;&#x5B58;&#x5B9E;&#x4F8B;&#xFF0C;&#x8BBE;&#x7F6E;<strong>maintainState</strong>&#x4E3A;true. &#x8FD9;&#x56DE;&#x589E;&#x5927;&#x5F00;&#x9500;&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x5C0F;&#x5FC3;&#x4F7F;&#x7528;</li>
+</ul>
+<h3 id="&#x901A;&#x8FC7;navigator&#x521B;&#x5EFA;overlay">&#x901A;&#x8FC7;navigator&#x521B;&#x5EFA;overlay</h3>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../test.html" class="navigation navigation-prev " aria-label="Previous page: 语法测试">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="navigator.html" class="navigation navigation-next " aria-label="Next page: navigator">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"overlay","level":"2.1","depth":1,"next":{"title":"navigator","level":"2.2","depth":1,"path":"widget/navigator.md","ref":"widget/navigator.md","articles":[]},"previous":{"title":"语法测试","level":"1.2","depth":1,"path":"test.md","ref":"test.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"widget/overlay.md","mtime":"2020-10-10T02:39:26.015Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-09T14:12:44.264Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
