@@ -22,3 +22,10 @@ assign a [GlobalKey] to the [Overlay] widget and obtain the [OverlayState] via [
 
 1. 给state设置GlobalKey
 2. 通过GlobalKey.currentState获取state
+
+
+###如何获取路由参数
+
+```dart
+ModalRoute.of(context).settings.arguments
+```

@@ -15,6 +15,117 @@ by positioning the dialog widget above the current page.
 3. 同时，也能在当前页面中展示对话框
 ```
 
+#### navigator 包含文件分析
+* RoutePopDisposition
+* Route
+* RouteSettings
+* Page
+* NavigatorObserver
+* HeroControllerScope
+* RouteTransitionRecord
+* TransitionDelegate
+* DefaultTransitionDelegate
+* Navigator
+* _RouteLifecycle
+```dart
+// The _RouteLifecycle state machine (only goes down):
+//
+//                    [creation of a _RouteEntry]
+//                                 |
+//                                 +
+//                                 |\
+//                                 | \
+//                                 | staging
+//                                 | /
+//                                 |/
+//                    +-+----------+--+-------+
+//                   /  |             |       |
+//                  /   |             |       |
+//                 /    |             |       |
+//                /     |             |       |
+//               /      |             |       |
+//      pushReplace   push*         add*   replace*
+//               \       |            |       |
+//                \      |            |      /
+//                 +--pushing#      adding  /
+//                          \        /     /
+//                           \      /     /
+//                           idle--+-----+
+//                           /  \
+//                          /    \
+//                        pop*  remove*
+//                        /        \
+//                       /       removing#
+//                     popping#       |
+//                      |             |
+//                   [finalizeRoute]  |
+//                              \     |
+//                              dispose*
+//                                 |
+//                                 |
+//                              disposed
+//                                 |
+//                                 |
+//                  [_RouteEntry garbage collected]
+//                          (terminal state)
+//
+// * These states are transient; as soon as _flushHistoryUpdates is run the
+//   route entry will exit that state.
+// # These states await futures or other events, then transition automatically.
+enum _RouteLifecycle {
+
+  // 等待过渡处理对象决定如何处理这些路由
+  staging, // we will wait for transition delegate to decide what to do with this route.
+  //
+  // routes that are present:
+  // 将要执行install，didAdd等方法，该路由由onGenerateInitialRoutes或initial widget创建
+  add, // we'll want to run install, didAdd, etc; a route created by onGenerateInitialRoutes or by the initial widget.pages
+  // 等待栈顶路由的didPush返回
+  adding, // we'll waiting for the future from didPush of top-most route to complete
+  // routes that are ready for transition.
+  // 将要执行install，didAdd等方法，该路由由push() 和 friends创建
+  push, // we'll want to run install, didPush, etc; a route added via push() and friends
+  // 将要执行install，didAdd等方法，该路由由pushReplace 和 friends创建
+  pushReplace, // we'll want to run install, didPush, etc; a route added via pushReplace() and friends
+  // 等待didPush方法执行结束回调
+  pushing, // we're waiting for the future from didPush to complete
+  // 将要执行install，didReplace等方法，该路由由replace 
+  replace, // we'll want to run install, didReplace, etc; a route added via replace() and friends
+  idle, // route is being harmless
+  //
+  // routes that are not present:
+  //
+  // routes that should be included in route announcement and should still listen to transition changes.
+  // 路由在路由声明中，仍然监听“渐变变化”
+  pop, // we'll want to call didPop
+  // 将要执行didReplace/didRemove
+  remove, // we'll want to run didReplace/didRemove etc
+  // routes should not be included in route announcement but should still listen to transition changes.
+  // 路由不在路由声明中，但仍然监听渐变过程，等待路由执行finalizeRoute去切换到dispose状态
+  popping, // we're waiting for the route to call finalizeRoute to switch to dispose
+  // 等待子路由完成动画，然后切换到dispose状态
+  removing, // we are waiting for subsequent routes to be done animating, then will switch to dispose
+  // routes that are completely removed from the navigator and overlay.
+  // 路由完全从navigator和overlay中移除，并将马上销毁该路由
+  dispose, // we will dispose the route momentarily
+  // 已销毁该路由
+  disposed, // we have disposed the route
+}
+```
+* _NotAnnounced
+* _RouteEntry
+* _NavigatorObservation
+* _NavigatorPushObservation
+* _NavigatorPopObservation
+* _NavigatorRemoveObservation
+* _NavigatorReplaceObservation
+* NavigatorState
+* _RestorationInformation
+* _NamedRestorationInformation
+* _AnonymousRestorationInformation
+* _HistoryProperty
+* RestorableRouteFuture
+
 #### Using the Navigator API（使用Navigator接口）
 
 Mobile apps typically reveal their contents via full-screen elements
@@ -346,3 +457,94 @@ that represent a subsection of your overall application.
    }
  }
 ```
+
+### 路由的动画是如何执行的
+我们以Navigator.of(context).push为例，
+
+先来看下调用栈
+
+* -->Navigator.of(context)!.push(route);
+* -->_pushEntry(_RouteEntry(route, initialState: _RouteLifecycle.push));
+* -->_history.add(entry);
+    _flushHistoryUpdates();
+* -->entry.handlePush(
+            navigator: this,
+            previous: previous?.route,
+            previousPresent: _getRouteBefore(index - 1, _RouteEntry.isPresentPredicate)?.route,
+            isNewFirst: next == null,
+          );
+* -->route.install();
+  
+  final TickerFuture routeFuture = route.didPush();
+
+##### 重点是install 和 didPush两个方法
+上边继承下边
+<table>
+  <tr>
+    <td>类</td>
+    <td>install</td>
+  </tr>
+  <tr>
+    <td>MaterialPageRoute</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>PageRoute</td>
+    <td>抽象类，未实现</td>
+  </tr>
+  <tr>
+    <td>ModalRoute</td>
+    <td>_animationProxy = ProxyAnimation(super.animation);
+    _secondaryAnimationProxy = ProxyAnimation(super.secondaryAnimation);</td>
+  </tr>
+  <tr>
+    <td>TransitionRoute</td>
+    <td>_controller = createAnimationController(); 
+    _animation = createAnimation() super.install();
+    if (_animation!.isCompleted && overlayEntries.isNotEmpty) {
+      overlayEntries.first.opaque = opaque;
+    }</td>
+  </tr>
+  <tr>
+    <td>OverlayRoute</td>
+    <td>_overlayEntries.addAll(createOverlayEntries());</td>
+  </tr>
+  <tr>
+    <td>Route</td>
+    <td> </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>类</td>
+    <td>didPush</td>
+  </tr>
+  <tr>
+    <td>MaterialPageRoute</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>PageRoute</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>ModalRoute</td>
+    <td>if (_scopeKey.currentState != null) {
+      navigator!.focusScopeNode.setFirstFocus(_scopeKey.currentState!.focusScopeNode);
+    }
+    return super.didPush();</td>
+  </tr>
+  <tr>
+    <td>TransitionRoute</td>
+    <td>return _controller!.forward();</td>
+  </tr>
+  <tr>
+    <td>OverlayRoute</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Route</td>
+    <td> navigator?.focusScopeNode.requestFocus();</td>
+  </tr>
+</table>
